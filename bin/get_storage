@@ -1,0 +1,12 @@
+#!/bin/bash
+# Script to print storage information
+#set -eo pipefail  # exit script if any command errors
+if [[ "$PWD" != */symon/bin ]]; then
+    cd "$(dirname "$0")"  # change PWD to bin directory
+fi
+
+# print storage Information
+## all mounted drives and space used vs total space available
+echo Storage:
+df -h | sed 's/^/  /'
+
