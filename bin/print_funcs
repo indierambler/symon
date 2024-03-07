@@ -1,0 +1,16 @@
+#!/bin/bash
+# Define print functions
+
+
+# Func to print keys/vals from report arr section
+# arg1=<report section name>
+function print_arr
+{
+  echo "${1}:"
+  declare -n keys="${1}_keys"
+  declare -n vals="${1}_vals"
+  for j in "${!keys[@]}"; do
+    echo "  ${keys[$j]}: ${vals[$j]}"
+  done
+}
+

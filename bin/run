@@ -1,0 +1,39 @@
+#!/bin/bash
+# Main script to run all system information scripts
+#set -eo pipefail  # exit script if any command errors
+cd "$(dirname "$0")"  # change PWD to bin directory
+
+# OS Information (working)
+source ./get_os
+
+# Users
+## list users and their groups and permissions
+
+# Memory Information
+## amount of installed RAM and how much used
+## amount of configured swap memory and how much used
+
+# Storage Information (working)
+source ./get_storage
+
+# Connected Devices
+
+# Network Information
+## IP addresses and their adapters
+## Open ports and what uses them
+## DDNS status
+
+# Systemd Services
+## statuses of any special systemd services that should or shouldn't run
+## if not running when did they last run/shut down
+
+# Docker
+## docker containers that are running and their open ports
+## docker volumes and their connected containers
+## docker networks running and their connected containers
+## space to be saved by pruning
+
+# Nginx Reverse Proxy
+# health checks on domains and subdomains
+# certificate ages
+
