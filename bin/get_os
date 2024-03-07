@@ -1,0 +1,29 @@
+#!/bin/bash
+# Script to print OS information
+#set -eo pipefail  # exit script if any command errors
+if [[ "$PWD" != */symon/bin ]]; then
+    cd "$(dirname "$0")"  # change PWD to bin directory
+fi
+
+# import print functions
+# print_arr ==> arg1=<report section name>
+source ./print_funcs
+
+# OS Information (working)
+# TODO: improve this by getting inxi output as array and then parsing lines
+declare -a OS_keys
+OS_keys+=("Hostname")
+OS_vals[0]=$(inxi -S | grep Host | cut -d ' ' -f 4)
+OS_keys+=("Distribution")
+OS_vals[1]="$(inxi -S | grep Distro | cut -d ' ' -f 6-)"
+OS_keys+=("Kernel Version")
+OS_vals[2]="$(inxi -S | grep Kernel | cut -d ' ' -f 6,7)"
+OS_keys+=("Update Log Size")
+OS_vals[3]="$(du -sh /var/log/apt | cut -f 1)"
+
+if [ -f /home/*/.local/share/Trash ]; then
+    OS_keys+=("Trash Bin Size")
+    OS_vals[4]="$(du -sh /home/*/.local/share/Trash | cut -f 1)"
+fi
+print_arr OS
+
